@@ -26,6 +26,8 @@ const paypal = new PayPal(
 
 Once you have an instance of the class, you can call various methods on it such as `createOrder` to interact with the API. There are exhaustive types included as part of this module to help you know what to put.
 
+Also, this is by no means a complete library at the moment and it may be quite some time before it is. That said, I still hope it helps.
+
 More detailed documentation will be coming at a later date.
 
 ## License
