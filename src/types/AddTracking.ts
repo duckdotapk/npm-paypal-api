@@ -33,6 +33,55 @@ export interface PayPalBatchTrackerCollection
 	links? : PayPalHATEOASLink[];
 }
 
+/** The consolidated details of the shipment. */
+export interface PayPalShipmentDetails
+{
+	/**
+	 * Unique transaction ID associated with this shipment.
+	 * 
+	 * 1 to 64 characters.
+	 */
+	transaction_id? : string;
+
+	/**
+	 * Tracking id for the shipment.
+	 * 
+	 * 1 to 100 characters.
+	 */
+	tracking_id? : string;
+
+	/**
+	 * Package name given to the shipment.
+	 * 
+	 * 1 to 100 characters.
+	 */
+	package_name? : string;
+
+	/**
+	 * Date when the shipment is expected to be delivered.
+	 * 
+	 * 20 to 64 characters.
+	 */
+	estimated_delivery_date? : string;
+
+	/**
+	 * Date when the shipment got delivered.
+	 * 
+	 * 20 to 64 characters.
+	 */
+	delivery_date? : string;
+
+	/**
+	 * Date when the shipment was shipped.
+	 * 
+	 * 20 to 64 characters.
+	 */
+	ship_date? : string;
+
+	/** Status of the shipment. */
+	shipment_status? : PayPalShipmentStatus;
+}
+
 /** The tracking information for a shipment. */
 export interface PayPalTracker
 {
@@ -89,7 +138,7 @@ export interface PayPalTracker
 	links? : PayPalHATEOASLink[];
 
 	/** The type of tracking number. */
-	tracking_number_type : PayPalTrackerTrackingNumberType;
+	tracking_number_type? : PayPalTrackerTrackingNumberType;
 
 	/** The status of the item shipment. */
 	status : PayPalTrackerStatus;
@@ -109,10 +158,10 @@ export interface PayPalTracker
 	 * 
 	 * 10 characters.
 	 */
-	shipment_date : string;
+	shipment_date? : string;
 
 	/** The carrier for the shipment. */
-	carrier : PayPalTrackerCarrier;
+	carrier? : PayPalTrackerCarrier;
 
 	/**
 	 * The date and time, in Internet date and time format. 
@@ -123,7 +172,7 @@ export interface PayPalTracker
 	 * 
 	 * 20 to 64 characters.
 	 */
-	last_updated_time : string;
+	last_updated_time? : string;
 }
 
 /** The add tracking information for one or more transactions response details. */
@@ -166,6 +215,28 @@ export interface PayPalTrackingIdentifier
 //
 
 /**
+ * Status of the shipment.
+ * 
+ * PENDING: Tracking information is not yet available for the shipment.
+ * INFORMATION_RECEIVED: Carrier has received information about the shipment, but not yet picked up.
+ * READY_FOR_PICKUP: Shipment is ready for pick up by the carrier.
+ * PICKUP_MISSED: Pickup for the shipment was missed by the carrier.
+ * PICKED_UP: Shipment has been picked up by carrier.
+ * MANIFEST: Shipment is prepared to be sent to the destination from the shipping point, a step before transportation.
+ * IN_TRANSIT: Shipment is on its way to its final destination.
+ * EXCEPTION: An exception occured while delivery of the shipment like custom hold, returned to sender etc. This is not a terminal status and can be succeeded by other lifecycle states.
+ * OUT_FOR_DELIVERY: Shipment is out for delivery
+ * ATTEMPT_FAILED: The delivery for the shipment failed. This is not a terminal status and can be succeeded by other lifecycle states.
+ * DELIVERED: Shipment is delivered.
+ * EXPIRED: Shipment goes into expired state after a defined SLA.
+ * UNDEFINED: Shipment state cannot be captured in any of the other states. 
+ */
+export type PayPalShipmentStatus = 
+	"PENDING" | "INFORMATION_RECEIVED" | "READY_FOR_PICKUP" | "PICKUP_MISSED" | "PICKED_UP" |
+	"MANIFEST" | "IN_TRANSIT" | "EXCEPTION" | "OUT_FOR_DELIVERY" | "ATTEMPT_FAILED" |
+	"DELIVERED" | "EXPIRED" | "UNDEFINED";
+
+/**
  * The carrier for the shipment. 
  * 
  * Some carriers have a global version as well as local subsidiaries. 
@@ -200,14 +271,6 @@ export type PayPalTrackerShipmentDirection = "FORWARD" | "RETURN";
 export type PayPalTrackerShipmentUploader = "MERCHANT" | "CONSUMER" | "PARTNER";
 
 /**
- * The type of tracking number.
- * 
- * CARRIER_PROVIDED: A merchant-provided tracking number.
- * E2E_PARTNER_PROVIDED: A marketplace-provided tracking number.
- */
-export type PayPalTrackerTrackingNumberType = "CARRIER_PROVIDED" | "E2E_PARTNER_PROVIDED";
-
-/**
  * The status of the item shipment.
  * 
  * @see https://developer.paypal.com/docs/tracking/reference/shipping-status/
@@ -219,3 +282,11 @@ export type PayPalTrackerTrackingNumberType = "CARRIER_PROVIDED" | "E2E_PARTNER_
  * SHIPPED: The item was shipped and is on the way. 
  */
 export type PayPalTrackerStatus = "CANCELLED" | "DELIVERED" | "LOCAL_PICKUP" | "ON_HOLD" | "SHIPPED";
+
+/**
+ * The type of tracking number.
+ * 
+ * CARRIER_PROVIDED: A merchant-provided tracking number.
+ * E2E_PARTNER_PROVIDED: A marketplace-provided tracking number.
+ */
+export type PayPalTrackerTrackingNumberType = "CARRIER_PROVIDED" | "E2E_PARTNER_PROVIDED";
