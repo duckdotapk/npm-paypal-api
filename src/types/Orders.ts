@@ -430,7 +430,7 @@ export interface PayPalOrder
 	links? : PayPalHATEOASLink[];
 
 	/** The payment source used to fund the payment. */
-	payment_source : PayPalPaymentSource;
+	payment_source? : PayPalPaymentSource;
 
 	/** The intent to either capture payment immediately or authorize a payment for an order after order creation. */
 	intent? : PayPalCheckoutPaymentIntent;
@@ -486,37 +486,37 @@ export interface PayPalPaymentInstruction
 export interface PayPalPaymentSource
 {
 	/** The payment card to use to fund a payment. Card can be a credit or debit card. */
-	card : unknown;
+	card? : unknown;
 
 	/** Information used to pay Bancontact. */
-	bancontact : unknown;
+	bancontact? : unknown;
 
 	/** Information used to pay using BLIK. */
-	blik : unknown;
+	blik? : unknown;
 
 	/** Information used to pay using eps. */
-	eps : unknown;
+	eps? : unknown;
 
 	/** Information needed to pay using giropay. */
-	giropay : unknown;
+	giropay? : unknown;
 
 	/** Information used to pay using iDEAL. */
-	ideal : unknown;
+	ideal? : unknown;
 
 	/** Information used to pay using MyBank. */
-	mybank : unknown;
+	mybank? : unknown;
 
 	/** Information used to pay using P24(Przelewy24). */
-	p24 : unknown;
+	p24? : unknown;
 
 	/** Information used to pay using Sofort. */
-	sofort : unknown;
+	sofort? : unknown;
 
 	/** Information needed to pay using Trustly. */
-	trustly : unknown;
+	trustly? : unknown;
 
 	/** The PayPal Wallet response. */
-	paypal : PayPalPayPalPaymentObject | PayPalWallet;
+	paypal? : PayPalPayPalPaymentObject | PayPalWallet;
 }
 
 /** The PayPal wallet response. */
