@@ -516,27 +516,27 @@ export interface PayPalPaymentSource
 	trustly? : unknown;
 
 	/** The PayPal Wallet response. */
-	paypal? : PayPalPayPalPaymentObject | PayPalWallet;
+	paypal? : PayPalWalletResponse | PayPalWallet;
 }
 
 /** The PayPal wallet response. */
-export interface PayPalPayPalPaymentObject
+export interface PayPalWalletResponse
 {
 	/** The phone type. */
-	phone_type : PayPalPhoneType;
+	phone_type? : PayPalPhoneType;
 
 	/** The email address of the PayPal account holder. */
-	email_address : string;
+	email_address? : string;
 
 	/** The PayPal-assigned ID for the PayPal account holder. */
-	account_id : string;
+	account_id? : string;
 
 	/**
 	 * The name of the PayPal account holder. 
 	 * 
 	 * Supports only the given_name and surname properties.
 	 */
-	name : PayPalName;
+	name? : PayPalName;
 
 	/**
 	 * The phone number, in its canonical international E.164 numbering plan format. 
@@ -545,10 +545,10 @@ export interface PayPalPayPalPaymentObject
 	 * 
 	 * Supports only the national_number property.
 	 */
-	phone_number : PayPalPhone;
+	phone_number? : PayPalPhone;
 
 	/** The birth date of the PayPal account holder in YYYY-MM-DD format. */
-	birth_date : string;
+	birth_date? : string;
 
 	/** 
 	 * The tax information of the PayPal account holder. 
@@ -557,7 +557,7 @@ export interface PayPalPayPalPaymentObject
 	 * 
 	 * Both tax_id and tax_id_type are required.
 	 */
-	tax_info : PayPalTaxInformation;
+	tax_info? : PayPalTaxInformation;
 
 	/**
 	 * The address of the PayPal account holder. 
@@ -566,7 +566,7 @@ export interface PayPalPayPalPaymentObject
 	 * 
 	 * Also referred to as the billing address of the customer.
 	 */
-	address : PayPalPortablePostalAddress;
+	address? : PayPalPortablePostalAddress;
 }
 
 /** The phone number in its canonical international E.164 numbering plan format. */
@@ -810,24 +810,24 @@ export interface PayPalWallet
 	 * 
 	 * Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values.
 	 */
-	experience_context : PayPalWalletExperienceContext;
+	experience_context? : PayPalWalletExperienceContext;
 
 	/**
 	 * The email address of the PayPal account holder.
 	 * 
 	 * 3 to 254 characters.
 	 */
-	email_address : string;
+	email_address? : string;
 
 	/**
 	 * The name of the PayPal account holder. 
 	 * 
 	 * Supports only the given_name and surname properties.
 	 */
-	name : PayPalName;
+	name? : PayPalName;
 
 	/** The birth date of the PayPal account holder in YYYY-MM-DD format. */
-	birth_date : string;
+	birth_date? : string;
 
 	/**
 	 * The tax information of the PayPal account holder. 
@@ -836,7 +836,7 @@ export interface PayPalWallet
 	 * 
 	 * Both tax_id and tax_id_type are required.
 	 */
-	tax_info : PayPalTaxInformation;
+	tax_info? : PayPalTaxInformation;
 
 
 	/**
@@ -846,7 +846,7 @@ export interface PayPalWallet
 	 * 
 	 * Also referred to as the billing address of the customer.
 	 */
-	address : PayPalPortablePostalAddress;
+	address? : PayPalPortablePostalAddress;
 }
 
 /** Customizes the payer experience during the approval process for payment with PayPal. */

@@ -1,3 +1,10 @@
+## 0.1.4
+
+* **[BREAKING CHANGE]** Renamed `PayPalPayPalPaymentObject` to `PayPalWalletResponse`.
+	* This is a better name that I did not notice on PayPal's confusing, badly laid out documentation.
+	* Also fixed a mistake where the properties of this object were not optional.
+* Fixed a mistake where the properties of a `PayPalWallet` were not optional.
+
 ## 0.1.3
 
 * Fixed a mistake where the `payment_source` property on a `PayPalOrder` was not optional.
