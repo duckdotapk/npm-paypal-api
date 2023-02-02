@@ -23,6 +23,7 @@
     "url": "https://github.com/duckdotapk/npm-paypal-api/issues"
   },
   "homepage": "https://github.com/duckdotapk/npm-paypal-api#readme",
+  "type": "module",
   "devDependencies": {
     "@donutteam/eslint-config": "^2.0.0",
     "@types/node": "^18.11.18",

@@ -1,3 +1,6 @@
+## 0.1.6
+Adding `"type": "module"` to package.json.
+
 ## 0.1.5
 Fixed a mistake where the `application_context` property on a `PayPalCreateOrderRequest` was not optional.
 
