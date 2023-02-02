@@ -46,7 +46,7 @@ export interface PayPalCreateOrderRequest
 	payment_source? : PayPalPaymentSource;
 
 	/** Customize the payer experience during the approval process for the payment with PayPal. */
-	application_context : unknown;
+	application_context? : unknown;
 }
 
 //

@@ -1,3 +1,6 @@
+## 0.1.5
+Fixed a mistake where the `application_context` property on a `PayPalCreateOrderRequest` was not optional.
+
 ## 0.1.4
 
 * **[BREAKING CHANGE]** Renamed `PayPalPayPalPaymentObject` to `PayPalWalletResponse`.
