@@ -122,7 +122,7 @@ export class PayPal
 	 *
 	 * @author Loren Goodwin
 	 */
-	async createOrder(options : PayPalCreateOrderRequest) : Promise<PayPalOrder>
+	async createOrder(paypal_request_id : string, options : PayPalCreateOrderRequest) : Promise<PayPalOrder>
 	{
 		const rawResponse = await fetch(this.baseUrl + "/v2/checkout/orders",
 			{
@@ -131,6 +131,15 @@ export class PayPal
 					{
 						"Authorization": "Bearer " + await this.getAccessToken(),
 						"Content-Type": "application/json",
+
+						// Note: This is required when creating an order with a payment_source.
+						//	I have NO IDEA what it means because their description on the docs makes no fucking sense.
+						//
+						//	"The server stores keys for 6 hours."
+						//	"The API callers can request the times to up to 72 hours by speaking to their Account Manager."
+						//
+						//	???
+						"PayPal-Request-Id": paypal_request_id,
 					},
 				body: JSON.stringify(options),
 			});

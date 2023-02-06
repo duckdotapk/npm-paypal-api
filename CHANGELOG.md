@@ -1,3 +1,7 @@
+## 0.1.7
+
+* **[BREAKING CHANGE]** Added new `paypal_request_id` argument to `createOrder`.
+
 ## 0.1.6
 Adding `"type": "module"` to package.json.
 
