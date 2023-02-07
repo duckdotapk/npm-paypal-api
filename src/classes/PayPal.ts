@@ -185,7 +185,7 @@ export class PayPal
 	 *
 	 * @author Loren Goodwin
 	 */
-	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureRequest) : Promise<boolean>
+	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureRequest) : Promise<PayPalVerifyWebhookSignatureResponse>
 	{
 		const rawResponse = await fetch(this.baseUrl + "/v1/notifications/verify-webhook-signature",
 			{
@@ -205,6 +205,6 @@ export class PayPal
 			throw new Error("Failed to verify webhook signature.");
 		}
 
-		return response.verification_status == "SUCCESS";
+		return response;
 	}
 }

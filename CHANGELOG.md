@@ -1,3 +1,7 @@
+## 0.1.8
+
+* **[BREAKING CHANGE]** Changed `verifyWebhookSignature` to return the actual response instead of a boolean.
+
 ## 0.1.7
 
 * **[BREAKING CHANGE]** Added new `paypal_request_id` argument to `createOrder`.
