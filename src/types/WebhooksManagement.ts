@@ -11,27 +11,12 @@ import
 // Option Interfaces
 //
 
-/** Options for PayPal.verifyWebhookSignature. */
-export interface PayPalVerifyWebhookSignatureOptions
-{
-	/** The URL to the certificate used to verify the event from the PAYPAL-CERT-URL header. */
-	certificateUrl : string;
-	
-	/** The raw body of the webhook event. */
-	rawBody : string;
-
-	/** The transmission ID from the PAYPAL-TRANSMISSION-ID header. */
-	transmissionId : string;
-	
-	/** The base64 signature from the PAYPAL-TRANSMISSION-SIG header. */
-	transmissionSignature : string;
-	
-	/** The transmission time from the PAYPAL-TRANSMISSION-TIME header. */
-	transmissionTime : string;
-	
-	/** The ID of your webhook. */
-	webhookId : string;
-}
+/** 
+ * Options for PayPal.verifyWebhookSignature. 
+ * 
+ * This is equivalent to PayPalVerifyWebhookSignatureRequest, but without the webhook_event property as the raw body is passed in separately.
+ */
+export type PayPalVerifyWebhookSignatureOptions = Omit<PayPalVerifyWebhookSignatureRequest, "webhook_event">;
 
 //
 // Request Interfaces

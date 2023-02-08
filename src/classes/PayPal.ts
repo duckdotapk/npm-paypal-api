@@ -2,13 +2,10 @@
 // Imports
 //
 
-import crypto from "node:crypto";
-
-import CRC32 from "crc-32";
 import { DateTime } from "luxon";
 
 import { PayPalCaptureOrderRequest, PayPalCreateOrderRequest, PayPalOrder } from "../types/Orders.js";
-import { PayPalVerifyWebhookSignatureOptions } from "../types/WebhooksManagement.js";
+import { PayPalVerifyWebhookSignatureOptions, PayPalVerifyWebhookSignatureResponse } from "../types/WebhooksManagement.js";
 
 //
 // Class
@@ -186,46 +183,36 @@ export class PayPal
 	/**
 	 * Verifies the signature of a webhook request.
 	 *
+	 * @param options Options for the request.
+	 * @param rawBody The raw body of the request. THIS MUST NOT BE TAMPERED WITH OR VERIFICATION WILL FAIL.
 	 * @author Loren Goodwin
-	 * @author Christof (StackOverflow) (PHP Version)
-	 * @see https://stackoverflow.com/a/74732126/18030485
+	 * @see https://stackoverflow.com/a/61420573/18030485
 	 */
-	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureOptions) : Promise<boolean>
-	{
-		//
-		// CRC32 Payload
-		//
+	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureOptions, rawBody : string) : Promise<PayPalVerifyWebhookSignatureResponse>
+	{	
+		const body =
+		{
+			...options,
 
-		const crc32 = CRC32.str(options.rawBody);
+			webhook_event: "__RAW_BODY__",
+		};
 
-		//
-		// Build Validation String
-		//
+		// HACK: This is a hack to workaround PayPal not canonicalizing the JSON body.
+		//	See https://stackoverflow.com/a/61420573/18030485 for more details and
+		//	also the code that inspired this.
+		const jsonBody = JSON.stringify(body).replace("\"__RAW_BODY__\"", rawBody);
 
-		const validationString = options.transmissionId + "|" + options.transmissionTime + "|" + options.webhookId + "|" + crc32;
+		const rawResponse = await fetch(this.baseUrl + "/v1/notifications/verify-webhook-signature",
+			{
+				method: "POST",
+				headers:
+					{
+						"Content-Type": "application/json",
+						"Authorization": `Bearer ${ await this.getAccessToken() }`,
+					},
+				body: jsonBody,
+			});
 
-		//
-		// Get Signature Buffer
-		//
-
-		const signature = Buffer.from(options.transmissionSignature, "base64");
-
-		//
-		// Get Public Key
-		//
-
-		const publicKeyResponse = await fetch(options.certificateUrl);
-
-		const publicKey = await publicKeyResponse.text();
-
-		//
-		// Verify
-		//
-
-		const verifier = crypto.createVerify("sha256WithRSAEncryption");
-
-		verifier.update(validationString);
-
-		return verifier.verify(publicKey, signature);
+		return await rawResponse.json();
 	}
 }

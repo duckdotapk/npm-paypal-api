@@ -1,5 +1,13 @@
+## 0.1.10
+
+* Removed the dependency on the `crc-32` package as it's no longer used by `verifyWebhookSignature`.
+* **[BREAKING CHANGE]** Replaced `verifyWebhookSignature` with ANOTHER new function.
+	* This one should actually work as expected this time.
+	* This works around issues in PayPal.
+
 ## 0.1.9
 
+* Added a dependency on the `crc-32` package as it's now used by `verifyWebhookSignature`.
 * **[BREAKING CHANGE]** Replaced `verifyWebhookSignature` with a new function since the old one somehow didn't work.
 	* PayPal's docs on this are VERY bad.
 	* This new version is based on a StackOverflow answer converted to TypeScript.

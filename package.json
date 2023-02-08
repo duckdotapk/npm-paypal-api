@@ -25,7 +25,6 @@
   "homepage": "https://github.com/duckdotapk/npm-paypal-api#readme",
   "type": "module",
   "dependencies": {
-    "crc-32": "^1.2.2",
     "luxon": "^3.2.1"
   },
   "devDependencies": {
