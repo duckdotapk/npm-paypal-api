@@ -2,6 +2,114 @@
 // Interfaces
 //
 
+/** The breakdown of the amount. Breakdown provides details such as total item amount, total tax amount, shipping, handling, insurance, and discounts, if any. */
+export interface PayPalAmountBreakdown
+{
+	/**
+	 * The subtotal for all items.
+	 *
+	 * Required if the request includes purchase_units[].items[].unit_amount.
+	 * Must equal the sum of (items[].unit_amount * items[].quantity) for all items.
+	 * item_total.value can not be a negative number.
+	 */
+	item_total? : PayPalAmount;
+
+	/**
+	 * The shipping fee for all items within a given purchase_unit.
+	 *
+	 * shipping.value can not be a negative number.
+	 */
+	shipping? : PayPalAmount;
+
+	/**
+	 * The handling fee for all items within a given purchase_unit.
+	 *
+	 * handling.value can not be a negative number.
+	 */
+	handling? : PayPalAmount;
+
+	/**
+	 * The total tax for all items.
+	 *
+	 * Required if the request includes purchase_units.items.tax.
+	 * Must equal the sum of (items[].tax * items[].quantity) for all items.
+	 * tax_total.value can not be a negative number.
+	 */
+	tax_total? : PayPalAmount;
+
+	/**
+	 * The insurance fee for all items within a given purchase_unit.
+	 *
+	 * insurance.value can not be a negative number.
+	 */
+	insurance? : PayPalAmount;
+
+	/**
+	 * The shipping discount for all items within a given purchase_unit.
+	 *
+	 * shipping_discount.value can not be a negative number.
+	 */
+	shipping_discount? : PayPalAmount;
+
+	/**
+	 * The discount for all items within a given purchase_unit.
+	 *
+	 * discount.value can not be a negative number.
+	 */
+	discount? : PayPalAmount;
+}
+
+/**
+ * The total order amount.
+ * 
+ * The amount must be a positive number.
+ * 
+ * For listed of supported currencies and decimal precision,
+ * @see https://developer.paypal.com/docs/integration/direct/rest/currency-codes/
+ */
+export interface PayPalAmount
+{
+	/**
+	 * The three-character ISO-4217 currency code that identifies the currency.
+	 *
+	 * See https://developer.paypal.com/api/rest/reference/currency-codes/
+	 *
+	 * 3 characters.
+	 */
+	currency_code : string;
+
+	/**
+	 * The value, which might be:
+	 * 	- An integer for currencies like JPY that are not typically fractional.
+	 * 	- A decimal fraction for currencies like TND that are subdivided into thousandths.
+	 *
+	 * For the required number of decimal places for a currency code, see https://developer.paypal.com/api/rest/reference/currency-codes/
+	 *
+	 * 32 characters max.
+	 */
+	value : string;
+}
+
+/**
+ * The total order amount with an optional breakdown that provides details, such as the total item amount, total tax amount, shipping, handling, insurance, and discounts, if any.
+ * 
+ * If you specify amount.breakdown, the amount equals item_total plus tax_total plus shipping plus handling plus insurance minus shipping_discount minus discount.
+ * 
+ * The amount must be a positive number.
+ * 
+ * For listed of supported currencies and decimal precision,
+ * @see https://developer.paypal.com/docs/integration/direct/rest/currency-codes/
+ */
+export interface PayPalAmountWithBreakdown extends PayPalAmount
+{
+	/**
+	 * The breakdown of the amount.
+	 *
+	 * Breakdown provides details such as total item amount, total tax amount, shipping, handling, insurance, and discounts, if any.
+	 */
+	breakdown? : PayPalAmountBreakdown;
+}
+
 /** The error details. */
 export interface PayPalError
 {
@@ -122,6 +230,16 @@ export interface PayPalPatch
 //
 // Types
 //
+
+/**
+ * The funds that are held on behalf of the merchant.
+ *
+ * INSTANT: The funds are released to the merchant immediately.
+ * DELAYED: The funds are held for a finite number of days. The actual duration depends on the region and type of integration.
+ * 	You can release the funds through a referenced payout.
+ * 	Otherwise, the funds disbursed automatically after the specified duration.
+ */
+export type PayPalDisbursementMode = "INSTANT" | "DELAYED";
 
 /**
  * The operation.
