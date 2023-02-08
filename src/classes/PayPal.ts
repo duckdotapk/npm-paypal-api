@@ -2,10 +2,13 @@
 // Imports
 //
 
+import crypto from "node:crypto";
+
+import CRC32 from "crc-32";
 import { DateTime } from "luxon";
 
 import { PayPalCaptureOrderRequest, PayPalCreateOrderRequest, PayPalOrder } from "../types/Orders.js";
-import { PayPalVerifyWebhookSignatureRequest, PayPalVerifyWebhookSignatureResponse } from "../types/WebhooksManagement.js";
+import { PayPalVerifyWebhookSignatureOptions } from "../types/WebhooksManagement.js";
 
 //
 // Class
@@ -184,27 +187,45 @@ export class PayPal
 	 * Verifies the signature of a webhook request.
 	 *
 	 * @author Loren Goodwin
+	 * @author Christof (StackOverflow) (PHP Version)
+	 * @see https://stackoverflow.com/a/74732126/18030485
 	 */
-	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureRequest) : Promise<PayPalVerifyWebhookSignatureResponse>
+	async verifyWebhookSignature(options : PayPalVerifyWebhookSignatureOptions) : Promise<boolean>
 	{
-		const rawResponse = await fetch(this.baseUrl + "/v1/notifications/verify-webhook-signature",
-			{
-				method: "POST",
-				headers:
-					{
-						"Authorization": "Bearer " + await this.getAccessToken(),
-						"Content-Type": "application/json",
-					},
-				body: JSON.stringify(options),
-			});
+		//
+		// CRC32 Payload
+		//
 
-		const response = await rawResponse.json() as PayPalVerifyWebhookSignatureResponse;
+		const crc32 = CRC32.str(options.rawBody);
 
-		if (rawResponse.status != 200)
-		{
-			throw new Error("Failed to verify webhook signature.");
-		}
+		//
+		// Build Validation String
+		//
 
-		return response;
+		const validationString = options.transmissionId + "|" + options.transmissionTime + "|" + options.webhookId + "|" + crc32;
+
+		//
+		// Get Signature Buffer
+		//
+
+		const signature = Buffer.from(options.transmissionSignature, "base64");
+
+		//
+		// Get Public Key
+		//
+
+		const publicKeyResponse = await fetch(options.certificateUrl);
+
+		const publicKey = await publicKeyResponse.text();
+
+		//
+		// Verify
+		//
+
+		const verifier = crypto.createVerify("sha256WithRSAEncryption");
+
+		verifier.update(validationString);
+
+		return verifier.verify(publicKey, signature);
 	}
 }

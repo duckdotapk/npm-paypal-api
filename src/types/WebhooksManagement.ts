@@ -8,6 +8,32 @@ import
 } from "./Shared.js";
 
 //
+// Option Interfaces
+//
+
+/** Options for PayPal.verifyWebhookSignature. */
+export interface PayPalVerifyWebhookSignatureOptions
+{
+	/** The URL to the certificate used to verify the event from the PAYPAL-CERT-URL header. */
+	certificateUrl : string;
+	
+	/** The raw body of the webhook event. */
+	rawBody : string;
+
+	/** The transmission ID from the PAYPAL-TRANSMISSION-ID header. */
+	transmissionId : string;
+	
+	/** The base64 signature from the PAYPAL-TRANSMISSION-SIG header. */
+	transmissionSignature : string;
+	
+	/** The transmission time from the PAYPAL-TRANSMISSION-TIME header. */
+	transmissionTime : string;
+	
+	/** The ID of your webhook. */
+	webhookId : string;
+}
+
+//
 // Request Interfaces
 //
 

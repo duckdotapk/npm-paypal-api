@@ -1,3 +1,10 @@
+## 0.1.9
+
+* **[BREAKING CHANGE]** Replaced `verifyWebhookSignature` with a new function since the old one somehow didn't work.
+	* PayPal's docs on this are VERY bad.
+	* This new version is based on a StackOverflow answer converted to TypeScript.
+	* May God help us all.
+
 ## 0.1.8
 
 * **[BREAKING CHANGE]** Changed `verifyWebhookSignature` to return the actual response instead of a boolean.
