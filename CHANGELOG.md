@@ -1,3 +1,8 @@
+## 0.2.0
+Added some Payment related types.
+
+There is no new functionality related to these... yet.
+
 ## 0.1.10
 
 * Removed the dependency on the `crc-32` package as it's no longer used by `verifyWebhookSignature`.
