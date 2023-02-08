@@ -1,3 +1,6 @@
+## 0.2.1
+Forgot to export those types, woops.
+
 ## 0.2.0
 Added some Payment related types.
 
