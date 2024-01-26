@@ -25,7 +25,7 @@ export interface PayPalOptions
 }
 
 /** A class for interacting with the PayPal API. */
-export class PayPal
+export class PayPalClient
 {
 	/** Whether to use the sandbox API. */
 	public readonly sandbox : boolean;

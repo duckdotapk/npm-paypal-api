@@ -1,4 +1,4 @@
-# PayPal API
+# PayPalClient API
 A class for interacting with the PayPal API.
 
 I made this package because PayPal does not provide a complete solution for doing this and their docs are sorely lacking in quality.
@@ -13,12 +13,12 @@ npm install @lorenstuff/paypal-api
 ```
 
 ## Documentation
-To use the package, simply import the `PayPal` class and create an instance of it with your PayPal Client ID and Secret. You will also need to specify whether the credentials are for sandbox mode or live mode:
+To use the package, simply import the `PayPalClient` class and create an instance of it with your PayPal Client ID and Secret. You will also need to specify whether the credentials are for sandbox mode or live mode:
 
 ```ts
-import { PayPal } from "@lorenstuff/paypal-api";
+import { PayPalClient } from "@lorenstuff/paypal-api";
 
-const paypal = new PayPal(
+const paypal = new PayPalClient(
 	{
 		sandbox: true,
 		clientId: "YOUR_CLIENT_ID_HERE",

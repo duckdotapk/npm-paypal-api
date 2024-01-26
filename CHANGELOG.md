@@ -1,3 +1,7 @@
+## 1.0.0
+
+* **[BREAKING CHANGE]**: Renamed `PayPal` to `PayPalClient`.
+
 ## 0.2.2
 Removed eslint and related packages.
 

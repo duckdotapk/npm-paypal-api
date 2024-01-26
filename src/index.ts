@@ -2,7 +2,7 @@
 // Exports
 //
 
-export * from "./classes/PayPal.js";
+export * from "./classes/PayPalClient.js";
 
 export * from "./types/AddTracking.js";
 export * from "./types/Orders.js";
