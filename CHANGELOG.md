@@ -1,3 +1,6 @@
+## 0.2.2
+Removed eslint and related packages.
+
 ## 0.2.1
 Forgot to export those types, woops.
 
