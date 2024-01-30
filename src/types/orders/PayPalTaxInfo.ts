@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 //
 // Type
 //
@@ -7,6 +9,5 @@ export interface PayPalTaxInfo
 {
 	tax_id : string;
 
-	// noinspection SpellCheckingInspection
 	tax_id_type : "BR_CPF" | "BR_CNPJ";
 }

@@ -8,12 +8,14 @@ import { PayPalBancontact } from "./PayPalBancontact.js";
 import { PayPalBLIK } from "./PayPalBLIK.js";
 import { PayPalCardResponse } from "./PayPalCardResponse.js";
 import { PayPalEPS } from "./PayPalEPS.js";
-import { PayPalGiropay } from "./PayPalGiropray.js";
+import { PayPalGiropay } from "./PayPalGiropay.js";
 import { PayPalIdeal } from "./PayPalIdeal.js";
 import { PayPalMyBank } from "./PayPalMyBank.js";
 import { PayPalP24 } from "./PayPalP24.js";
 import { PayPalWalletResponse } from "./PayPalWalletResponse.js";
 import { PayPalSofort } from "./PayPalSofort.js";
+import { PayPalTrustly } from "./PayPalTrustly.js";
+import { PayPalVenmoWalletResponse } from "./PayPalVenmoWalletResponse.js";
 
 //
 // Type
@@ -40,9 +42,9 @@ export interface PayPalPaymentSourceResponse
 
 	sofort? : PayPalSofort;
 
-	trustly? : unknown; // TODO
+	trustly? : PayPalTrustly;
 
-	venmo? : unknown; // TODO
+	venmo? : PayPalVenmoWalletResponse;
 
 	paypal? : PayPalWalletResponse;
 }

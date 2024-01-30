@@ -19,5 +19,5 @@ export interface PayPalVaultResponse
 
 	links? : PayPalLinkDescription[];
 
-	customer? : PayPalCustomer; // TODO: The docs say this object only has the "id" field. This should maybe pick that specifically
+	customer? : Pick<PayPalCustomer, "id">; // Note: The docs say only the ID field is available here
 }

@@ -16,6 +16,8 @@ import { PayPalP24Request } from "./PayPalP24Request.js";
 import { PayPalToken } from "./PayPalToken.js";
 import { PayPalWallet } from "./PayPalWallet.js";
 import { PayPalSofortRequest } from "./PayPalSofortRequest.js";
+import { PayPalTrustlyRequest } from "./PayPalTrustlyRequest.js";
+import { PayPalVenmoWalletRequest } from "./PayPalVenmoWalletRequest.js";
 
 //
 // Type
@@ -46,9 +48,9 @@ export interface PayPalPaymentSource
 
 	sofort? : PayPalSofortRequest;
 
-	trustly? : unknown; // TODO
+	trustly? : PayPalTrustlyRequest;
 
 	apple_pay? : PayPalApplePayRequest;
 
-	venmo? : unknown; // TODO
+	venmo? : PayPalVenmoWalletRequest;
 }

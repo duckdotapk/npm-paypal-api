@@ -3,6 +3,7 @@
 //
 
 import { PayPalWalletCustomer } from "./PayPalWalletCustomer.js";
+import { PayPalVaultPayPalWalletBase } from "./PayPalVaultPayPalWalletBase.js";
 
 //
 // Type
@@ -13,5 +14,5 @@ export interface PayPalWalletAttributes
 {
 	customer? : PayPalWalletCustomer;
 
-	vault? : unknown; // TODO
+	vault? : PayPalVaultPayPalWalletBase;
 }

@@ -3,6 +3,7 @@
 //
 
 import { PayPalShippingDetail } from "./PayPalShippingDetail.js";
+import { PayPalTrackerResponse } from "./PayPalTrackerResponse.js";
 
 //
 // Type
@@ -11,5 +12,5 @@ import { PayPalShippingDetail } from "./PayPalShippingDetail.js";
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-shipping_with_tracking_details */
 export interface PayPalShippingWithTrackingDetails extends PayPalShippingDetail
 {
-	trackers? : unknown[]; // TODO
+	trackers? : PayPalTrackerResponse[];
 }

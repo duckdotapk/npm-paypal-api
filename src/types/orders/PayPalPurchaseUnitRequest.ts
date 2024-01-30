@@ -6,6 +6,7 @@ import { PayPalAmountWithBreakdown } from "./PayPalAmountWithBreakdown.js";
 import { PayPalItem } from "./PayPalItem.js";
 import { PayPalPayee } from "./PayPalPayee.js";
 import { PayPalPaymentInstruction } from "./PayPalPaymentInstruction.js";
+import { PayPalShippingDetail } from "./PayPalShippingDetail.js";
 import { PayPalSupplementaryData } from "./PayPalSupplementaryData.js";
 
 //
@@ -33,7 +34,7 @@ export interface PayPalPurchaseUnitRequest
 
 	payment_instruction? : PayPalPaymentInstruction;
 
-	shipping? : unknown; // TODO
+	shipping? : PayPalShippingDetail;
 
 	supplementary_data? : PayPalSupplementaryData;
 }

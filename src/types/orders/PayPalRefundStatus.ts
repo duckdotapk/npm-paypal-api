@@ -1,4 +1,10 @@
 //
+// Imports
+//
+
+import { PayPalRefundStatusDetails } from "./PayPalRefundStatusDetails.js";
+
+//
 // Type
 //
 
@@ -6,4 +12,6 @@
 export interface PayPalRefundStatus
 {
 	status? : "CANCELLED" | "FAILED" | "PENDING" | "COMPLETED";
+
+	status_details? : PayPalRefundStatusDetails;
 }

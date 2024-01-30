@@ -10,7 +10,7 @@ import { PayPalExperienceContextBase } from "./PayPalExperienceContextBase.js";
 // Type
 //
 
-export interface PayPalSofortRequest
+export interface PayPalTrustlyRequest
 {
 	name : string;
 

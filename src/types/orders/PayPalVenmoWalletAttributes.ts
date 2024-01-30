@@ -12,7 +12,7 @@ import { PayPalWalletCustomer } from "./PayPalWalletCustomer.js";
 
 export interface PayPalVenmoWalletAttributes
 {
-	customer? : PayPalWalletCustomer; // TODO: This only has the "id" field in the docs
+	customer? : Pick<PayPalWalletCustomer, "id">; // Note: This only has the "id" field in the docs
 
 	vault? : PayPalVaultVenmoWalletBase;
 }

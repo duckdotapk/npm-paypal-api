@@ -12,7 +12,7 @@ import { PayPalThreeDSecureAuthenticationResponse } from "./PayPalThreeDSecureAu
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-authentication_response */
 export interface PayPalAuthenticationResponse
 {
-	liability_shift : PayPalLiabilityShift;
+	liability_shift? : PayPalLiabilityShift;
 
-	three_d_secure : PayPalThreeDSecureAuthenticationResponse;
+	three_d_secure? : PayPalThreeDSecureAuthenticationResponse;
 }

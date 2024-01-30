@@ -7,6 +7,7 @@ import { PayPalPhone } from "./PayPalPhone.js";
 import { PayPalPhoneType } from "./PayPalPhoneType.js";
 import { PayPalTaxInfo } from "./PayPalTaxInfo.js";
 import { PayPalWalletAttributesResponse } from "./PayPalWalletAttributesResponse.js";
+import { PayPalPortablePostalAddressMediumGrained } from "./PayPalPortablePostalAddressMediumGrained.js";
 
 //
 // Type
@@ -33,5 +34,5 @@ export interface PayPalWalletResponse
 
 	tax_info? : PayPalTaxInfo;
 
-	address? : unknown; // TODO
+	address? : PayPalPortablePostalAddressMediumGrained;
 }

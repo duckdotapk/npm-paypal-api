@@ -18,7 +18,7 @@ import { PayPalLinkDescription } from "../PayPal.js";
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-authorization */
 export interface PayPalAuthorization extends PayPalActivityTimestamps
 {
-	status? : PayPalAuthorizationStatus;
+	status? : PayPalAuthorizationStatus["status"]; // TODO: I'm not sure if it is a mistake in the docs that this doesn't use the *object* itself
 
 	status_details? : PayPalAuthorizationStatusDetails;
 

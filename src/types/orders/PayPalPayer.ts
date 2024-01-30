@@ -3,6 +3,7 @@
 //
 
 import { PayPalName } from "./PayPalName.js";
+import { PayPalPayerBase } from "./PayPalPayerBase.js";
 import { PayPalPhoneWithType } from "./PayPalPhoneWithType.js";
 import { PayPalPortablePostalAddressMediumGrained } from "./PayPalPortablePostalAddressMediumGrained.js";
 import { PayPalTaxInfo } from "./PayPalTaxInfo.js";
@@ -12,12 +13,8 @@ import { PayPalTaxInfo } from "./PayPalTaxInfo.js";
 //
 
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-payer */
-export interface PayPalPayer
+export interface PayPalPayer extends PayPalPayerBase
 {
-	email_address? : string;
-
-	payer_id? : string;
-
 	name? : PayPalName;
 
 	phone? : PayPalPhoneWithType;

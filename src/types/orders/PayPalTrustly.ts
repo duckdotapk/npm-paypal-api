@@ -4,7 +4,8 @@
 // Type
 //
 
-export interface PayPalSofort
+/** @see https://developer.paypal.com/docs/api/orders/v2/#definition-trustly */
+export interface PayPalTrustly
 {
 	name? : string;
 

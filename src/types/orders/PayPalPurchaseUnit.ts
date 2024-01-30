@@ -8,6 +8,7 @@ import { PayPalPayee } from "./PayPalPayee.js";
 import { PayPalPaymentCollection } from "./PayPalPaymentCollection.js";
 import { PayPalPaymentInstruction } from "./PayPalPaymentInstruction.js";
 import { PayPalSupplementaryData } from "./PayPalSupplementaryData.js";
+import { PayPalShippingWithTrackingDetails } from "./PayPalShippingWithTrackingDetails.js";
 
 //
 // Type
@@ -36,7 +37,7 @@ export interface PayPalPurchaseUnit
 
 	payment_instruction? : PayPalPaymentInstruction;
 
-	shipping? : unknown; // TODO
+	shipping? : PayPalShippingWithTrackingDetails; // TODO
 
 	supplementary_data? : PayPalSupplementaryData;
 

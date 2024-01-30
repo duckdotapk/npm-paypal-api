@@ -12,7 +12,7 @@ import { PayPalLinkDescription } from "../PayPal.js";
 
 //
 // Type
-//
+//1
 
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-refund */
 export interface PayPalRefund extends PayPalActivityTimestamps

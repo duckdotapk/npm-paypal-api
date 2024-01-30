@@ -22,7 +22,7 @@ export interface PayPalCardResponse
 
 	available_networks? : PayPalCardBrand[];
 
-	type? : PayPalCardType; // TODO: This doesn't include "STORE" in the docs, maybe it shouldn't here either?
+	type? : Omit<PayPalCardType, "STORE">; // Note: This doesn't include "STORE" in the docs
 
 	from_request? : PayPalCardFromRequest;
 
