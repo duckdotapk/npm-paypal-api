@@ -4,33 +4,14 @@
 
 import { DateTime } from "luxon";
 
+import { PayPalOAuthToken } from "../types/oauth/PayPalOAuthToken.js";
+import { PayPalOAuthTokenError } from "../types/oauth/PayPalOAuthTokenError.js";
+
+import { PayPalError } from "../types/PayPalError.js";
+
 //
 // Class
 //
-
-export type OAuthTokenResponse = OAuthTokenResponseFailure | OAuthTokenResponseSuccess;
-
-export interface OAuthTokenResponseFailure
-{
-	error : string;
-
-	error_description : string;
-}
-
-export interface OAuthTokenResponseSuccess
-{
-	scope : string;
-
-	access_token : string;
-
-	token_type : string;
-
-	app_id : string;
-
-	expires_in : number;
-
-	nonce : string;
-}
 
 export interface PayPalClientOptions
 {
@@ -39,6 +20,19 @@ export interface PayPalClientOptions
 	secret : string;
 
 	useSandbox : boolean;
+}
+
+export interface PayPalClientRequestOptions
+{
+	method : string;
+
+	path : string;
+
+	queryParameters? : ConstructorParameters<typeof URLSearchParams>[0];
+
+	headers? : ConstructorParameters<typeof Headers>[0];
+
+	body? : unknown;
 }
 
 export class PayPalClient
@@ -95,7 +89,7 @@ export class PayPalClient
 					},
 			});
 
-		const response = (await rawResponse.json()) as OAuthTokenResponse;
+		const response = (await rawResponse.json()) as PayPalOAuthToken | PayPalOAuthTokenError;
 
 		if ("error" in response)
 		{
@@ -106,5 +100,37 @@ export class PayPalClient
 		this.accessTokenExpiresAt = DateTime.now().plus({ seconds: response.expires_in }).toSeconds();
 
 		return response.access_token;
+	}
+
+	async request<PayPalResponse>(options : PayPalClientRequestOptions) : Promise<PayPalError | PayPalResponse>
+	{
+		let url = this.baseUrl + options.path;
+
+		if (options.queryParameters != null)
+		{
+			const searchParams = new URLSearchParams(options.queryParameters);
+
+			url += "?" + searchParams.toString();
+		}
+
+		const accessToken = await this.getAccessToken();
+		
+		const headers = new Headers(options.headers);
+
+		headers.set("Authorization", "Bearer " + accessToken);
+		headers.set("Content-Type", "application/json");
+
+		let body = options.body != null
+			? JSON.stringify(options.body)
+			: null;
+
+		const response = await fetch(url,
+			{
+				method: options.method,
+				headers,
+				body,
+			});
+
+		return await response.json();
 	}
 }
