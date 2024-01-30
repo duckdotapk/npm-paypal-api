@@ -13,24 +13,21 @@ import { PayPalError } from "../types/PayPalError.js";
 // Class
 //
 
-export interface CreateOrderRequestHeaders
-{
-	"PayPal-Request-Id"? : string;
-
-	"PayPal-Partner-Attribution-Id"? : string;
-
-	"PayPal-Client-Metadata-Id"? : string;
-
-	"Prefer"? : string;
-
-	"Authorization" : string;
-
-	"Content-Type" : string;
-}
-
 export interface PayPalOrdersClientOptions
 {
 	payPalClient : PayPalClient;
+}
+
+export interface PayPalOrdersClientCreateOrderResult
+{
+	requestId : string;
+
+	orderOrError : PayPalOrder | PayPalError;
+}
+
+export interface PayPalOrdersClientShowOrderDetailsResult
+{
+	orderOrError : PayPalError | PayPalOrder;
 }
 
 export class PayPalOrdersClient
@@ -42,24 +39,40 @@ export class PayPalOrdersClient
 		this.payPalClient = options.payPalClient;
 	}
 
-	async createOrder(headers : Omit<CreateOrderRequestHeaders, "Prefer" | "Authorization" | "Content-Type">, body : PayPalOrderRequest) : Promise<PayPalError | PayPalOrder>
+	async createOrder(body : PayPalOrderRequest) : Promise<PayPalOrdersClientCreateOrderResult>
 	{
-		const accessToken = await this.payPalClient.getAccessToken();
+		const requestId = Math.random().toString();
 
-		const response = await fetch(this.payPalClient.baseUrl + "/v2/checkout/orders",
+		const headers = new Headers();
+
+		headers.set("PayPal-Request-Id", requestId);
+
+		headers.set("Prefer", "return=representation");
+
+		const orderOrError = await this.payPalClient.request<PayPalOrder>(
 			{
 				method: "POST",
-				headers:
-					{
-						...headers,
-
-						"Prefer": "return=representation",
-						"Authorization": "Bearer " + accessToken,
-						"Content-Type": "application/json",
-					},
-				body: JSON.stringify(body),
+				path: "/v2/checkout/orders",
+				headers,
+				body,
 			});
 
-		return await response.json();
+		return {
+			requestId,
+			orderOrError,
+		};
+	}
+
+	async showOrderDetails(id : string) : Promise<PayPalOrdersClientShowOrderDetailsResult>
+	{
+		const orderOrError = await this.payPalClient.request<PayPalOrder>(
+			{
+				method: "GET",
+				path: "/v2/checkout/orders/" + id,
+			});
+
+		return {
+			orderOrError,
+		};
 	}
 }
