@@ -18,7 +18,7 @@ To use the package, simply import the `PayPalClient` class and create an instanc
 ```ts
 import { PayPalClient } from "@lorenstuff/paypal-api";
 
-const paypal = new PayPalClient(
+const payPalClient = new PayPalClient(
 	{
 		sandbox: true,
 		clientId: "YOUR_CLIENT_ID_HERE",
@@ -26,11 +26,42 @@ const paypal = new PayPalClient(
 	});
 ```
 
-Once you have an instance of the class, you can call various methods on it such as `createOrder` to interact with the API. There are exhaustive types included as part of this module to help you know what to put.
+Once you have an instance of the class, you can use it to instantiate clients for various PayPal APIs such as the Orders API or the Webhooks Management API:
+```ts
+import { PayPalOrdersClient } from "@lorenstuff/paypal-api";
 
-Also, this is by no means a complete library at the moment and it may be quite some time before it is. That said, I still hope it helps.
+const payPalOrdersClient = new PayPalOrdersClient(
+	{
+		payPalClient,
+	});
 
-More detailed documentation will be coming at a later date.
+// call stuff on payPalOrdersClient such as createOrder or showOrderDetails
+```
+
+Each client implements at least part of its respective API. API coverage information can be found in the next section.
+
+## API Coverage
+Currently, this library only covers portions of PayPal's API.
+
+| API                   | Coverage | Class                          |
+|-----------------------|----------|--------------------------------|
+| Add Tracking          | None     | -                              |
+| Catalog Products      | None     | -                              |
+| Disputes              | None     | -                              |
+| Identity              | None     | -                              | 
+| Invoicing             | None     | -                              |
+| Orders                | Partial  | PayPalOrdersClient             |
+| Partner Referrals     | None     | -                              |
+| Payment Experience    | None     | -                              |
+| Payment Method Tokens | None     | -                              |
+| Payments              | None     | -                              |
+| Payouts               | None     | -                              |
+| Referenced Payouts    | None     | -                              |
+| Subscriptions         | None     | -                              |
+| Transaction Search    | None     | -                              |
+| Webhooks Management   | Partial  | PayPalWebhooksManagementClient |
+
+Portions not covered by the classes and types provided in this package can be manually accessed using the `request` method of a `PayPalClient` instance.
 
 ## Changelog
 See [CHANGELOG.md](https://github.com/duckdotapk/npm-paypal-api/blob/main/CHANGELOG.md)
