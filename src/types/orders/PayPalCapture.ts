@@ -21,7 +21,7 @@ import { PayPalLinkDescription } from "../PayPal.js";
 /** @see https://developer.paypal.com/docs/api/orders/v2/#definition-capture */
 export interface PayPalCapture extends PayPalActivityTimestamps
 {
-	status? : PayPalCaptureStatus["status"]; // TODO: Like authorization, docs say this doesn't use the object??
+	status? : PayPalCaptureStatus["status"]; // TODO: The docs doesn't use the object itself here but I feel like the docs are wrong...
 
 	status_details? : PayPalCaptureStatusDetails;
 

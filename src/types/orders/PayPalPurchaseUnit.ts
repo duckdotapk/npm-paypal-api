@@ -37,7 +37,7 @@ export interface PayPalPurchaseUnit
 
 	payment_instruction? : PayPalPaymentInstruction;
 
-	shipping? : PayPalShippingWithTrackingDetails; // TODO
+	shipping? : PayPalShippingWithTrackingDetails;
 
 	supplementary_data? : PayPalSupplementaryData;
 
