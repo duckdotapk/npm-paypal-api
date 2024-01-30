@@ -12,7 +12,7 @@ import { PayPalProcessorResponse } from "./PayPalProcessorResponse.js";
 import { PayPalSellerProtection } from "./PayPalSellerProtection.js";
 import { PayPalSellerReceivableBreakdown } from "./PayPalSellerReceivableBreakdown.js";
 
-import { PayPalLinkDescription } from "../PayPal.js";
+import { PayPalLinkDescription } from "../PayPalLinkDescription.js";
 
 //
 // Type

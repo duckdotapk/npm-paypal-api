@@ -9,7 +9,7 @@ import { PayPalMoney } from "./PayPalMoney.js";
 import { PayPalNetworkTransactionReference } from "./PayPalNetworkTransactionReference.js";
 import { PayPalSellerProtection } from "./PayPalSellerProtection.js";
 
-import { PayPalLinkDescription } from "../PayPal.js";
+import { PayPalLinkDescription } from "../PayPalLinkDescription.js";
 
 //
 // Type

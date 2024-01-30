@@ -8,7 +8,7 @@ import { PayPalPayee } from "./PayPalPayee.js";
 import { PayPalRefundStatus } from "./PayPalRefundStatus.js";
 import { PayPalRefundStatusDetails } from "./PayPalRefundStatusDetails.js";
 
-import { PayPalLinkDescription } from "../PayPal.js";
+import { PayPalLinkDescription } from "../PayPalLinkDescription.js";
 import { PayPalSellerPayableBreakdown } from "./PayPalSellerPayableBreakdown.js";
 
 //

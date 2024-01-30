@@ -4,7 +4,7 @@
 
 import { PayPalCustomer } from "./PayPalCustomer.js";
 
-import { PayPalLinkDescription } from "../PayPal.js";
+import { PayPalLinkDescription } from "../PayPalLinkDescription.js";
 
 //
 // Type

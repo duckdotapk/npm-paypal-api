@@ -10,7 +10,7 @@ import { PayPalPaymentSourceResponse } from "./PayPalPaymentSourceResponse.js";
 import { PayPalProcessingInstruction } from "./PayPalProcessingInstruction.js";
 import { PayPalPurchaseUnit } from "./PayPalPurchaseUnit.js";
 
-import { PayPalLinkDescription } from "../PayPal.js";
+import { PayPalLinkDescription } from "../PayPalLinkDescription.js";
 
 //
 // Type
