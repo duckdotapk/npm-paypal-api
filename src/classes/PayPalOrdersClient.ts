@@ -8,6 +8,7 @@ import { PayPalOrder } from "../types/orders/PayPalOrder.js";
 import { PayPalOrderRequest } from "../types/orders/PayPalOrderRequest.js";
 
 import { PayPalError } from "../types/PayPalError.js";
+import { PayPalPatchRequest } from "../types/PayPalPatchRequest.js";
 
 //
 // Class
@@ -27,7 +28,12 @@ export interface PayPalCreateOrderResult
 
 export interface PayPalShowOrderDetailsResult
 {
-	orderOrError : PayPalError | PayPalOrder;
+	orderOrError : PayPalOrder | PayPalError;
+}
+
+export interface PayPalUpdateOrderResult
+{
+	emptyOrError : {} | PayPalError;
 }
 
 export class PayPalOrdersClient
@@ -73,6 +79,20 @@ export class PayPalOrdersClient
 
 		return {
 			orderOrError,
+		};
+	}
+
+	async updateOrder(id : string, body : PayPalPatchRequest) : Promise<PayPalUpdateOrderResult>
+	{
+		const emptyOrError = await this.payPalClient.request<{}>(
+			{
+				method: "PATCH",
+				path: "/v2/checkout/orders/" + id,
+				body,
+			});
+
+		return {
+			emptyOrError,
 		};
 	}
 }
