@@ -18,14 +18,14 @@ export interface PayPalOrdersClientOptions
 	payPalClient : PayPalClient;
 }
 
-export interface PayPalOrdersClientCreateOrderResult
+export interface PayPalCreateOrderResult
 {
 	requestId : string;
 
 	orderOrError : PayPalOrder | PayPalError;
 }
 
-export interface PayPalOrdersClientShowOrderDetailsResult
+export interface PayPalShowOrderDetailsResult
 {
 	orderOrError : PayPalError | PayPalOrder;
 }
@@ -39,7 +39,7 @@ export class PayPalOrdersClient
 		this.payPalClient = options.payPalClient;
 	}
 
-	async createOrder(body : PayPalOrderRequest) : Promise<PayPalOrdersClientCreateOrderResult>
+	async createOrder(body : PayPalOrderRequest) : Promise<PayPalCreateOrderResult>
 	{
 		const requestId = Math.random().toString();
 
@@ -63,7 +63,7 @@ export class PayPalOrdersClient
 		};
 	}
 
-	async showOrderDetails(id : string) : Promise<PayPalOrdersClientShowOrderDetailsResult>
+	async showOrderDetails(id : string) : Promise<PayPalShowOrderDetailsResult>
 	{
 		const orderOrError = await this.payPalClient.request<PayPalOrder>(
 			{

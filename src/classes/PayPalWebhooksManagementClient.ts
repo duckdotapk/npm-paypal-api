@@ -18,7 +18,7 @@ export interface PayPalWebhooksManagementClientOptions
 	payPalClient : PayPalClient;
 }
 
-export interface PayPalWebhooksManagementClientVerifyWebhookSignatureResult
+export interface PayPalVerifyWebhookSignatureResult
 {
 	verifyWebhookSignatureResponseOrError : PayPalVerifyWebhookSignatureResponse | PayPalError;
 }
@@ -39,7 +39,7 @@ export class PayPalWebhooksManagementClient
 	 * @param rawBody The raw body of the request. THIS MUST NOT BE TAMPERED WITH OR VERIFICATION WILL FAIL.
 	 * @see https://stackoverflow.com/a/61420573/18030485
 	 */
-	async verifyWebhookSignature(partialBody : Omit<PayPalVerifyWebhookSignature, "webhook_event">, rawBody : string) : Promise<PayPalWebhooksManagementClientVerifyWebhookSignatureResult>
+	async verifyWebhookSignature(partialBody : Omit<PayPalVerifyWebhookSignature, "webhook_event">, rawBody : string) : Promise<PayPalVerifyWebhookSignatureResult>
 	{
 		const body =
 			{
@@ -59,7 +59,7 @@ export class PayPalWebhooksManagementClient
 				path: "/v1/notifications/verify-webhook-signature",
 				body: jsonBody,
 			});
-		
+
 		return {
 			verifyWebhookSignatureResponseOrError,
 		};
