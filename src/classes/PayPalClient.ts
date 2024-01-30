@@ -114,7 +114,7 @@ export class PayPalClient
 		}
 
 		const accessToken = await this.getAccessToken();
-		
+
 		const headers = new Headers(options.headers);
 
 		headers.set("Authorization", "Bearer " + accessToken);
@@ -131,6 +131,15 @@ export class PayPalClient
 				body,
 			});
 
-		return await response.json();
+		const text = await response.text();
+
+		// Note: PayPal returns empty request bodies for patch requests (and maybe other requests)
+		//	This is the cleanest way to handle this that I can think of atm
+		if (text == "")
+		{
+			return {} as PayPalResponse;
+		}
+
+		return JSON.parse(text);
 	}
 }
