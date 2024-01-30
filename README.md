@@ -50,7 +50,7 @@ Currently, this library only covers portions of PayPal's API.
 | Disputes              | None     | -                              |
 | Identity              | None     | -                              | 
 | Invoicing             | None     | -                              |
-| Orders                | Partial  | PayPalOrdersClient             |
+| Orders                | Full     | PayPalOrdersClient             |
 | Partner Referrals     | None     | -                              |
 | Payment Experience    | None     | -                              |
 | Payment Method Tokens | None     | -                              |
