@@ -18,6 +18,11 @@ export interface PayPalWebhooksManagementClientOptions
 	payPalClient : PayPalClient;
 }
 
+export interface PayPalWebhooksManagementClientVerifyWebhookSignatureResult
+{
+	verifyWebhookSignatureResponseOrError : PayPalVerifyWebhookSignatureResponse | PayPalError;
+}
+
 export class PayPalWebhooksManagementClient
 {
 	payPalClient : PayPalClient;
@@ -34,7 +39,7 @@ export class PayPalWebhooksManagementClient
 	 * @param rawBody The raw body of the request. THIS MUST NOT BE TAMPERED WITH OR VERIFICATION WILL FAIL.
 	 * @see https://stackoverflow.com/a/61420573/18030485
 	 */
-	async verifyWebhookSignature(partialBody : Omit<PayPalVerifyWebhookSignature, "webhook_event">, rawBody : string) : Promise<PayPalVerifyWebhookSignatureResponse | PayPalError>
+	async verifyWebhookSignature(partialBody : Omit<PayPalVerifyWebhookSignature, "webhook_event">, rawBody : string) : Promise<PayPalWebhooksManagementClientVerifyWebhookSignatureResult>
 	{
 		const body =
 			{
@@ -48,17 +53,15 @@ export class PayPalWebhooksManagementClient
 		//	also the code that inspired this.
 		const jsonBody = JSON.stringify(body).replace("\"__RAW_BODY__\"", rawBody);
 
-		const response = await fetch(this.payPalClient.baseUrl + "/v1/notifications/verify-webhook-signature",
+		const verifyWebhookSignatureResponseOrError = await this.payPalClient.request<PayPalVerifyWebhookSignatureResponse>(
 			{
 				method: "POST",
-				headers:
-					{
-						"Content-Type": "application/json",
-						"Authorization": `Bearer ${ await this.payPalClient.getAccessToken() }`,
-					},
+				path: "/v1/notifications/verify-webhook-signature",
 				body: jsonBody,
 			});
-
-		return await response.json();
+		
+		return {
+			verifyWebhookSignatureResponseOrError,
+		};
 	}
 }
