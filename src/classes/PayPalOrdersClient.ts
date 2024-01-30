@@ -4,6 +4,7 @@
 
 import { PayPalClient } from "./PayPalClient.js";
 
+import { PayPalConfirmOrderRequest } from "../types/orders/PayPalConfirmOrderRequest.js";
 import { PayPalOrder } from "../types/orders/PayPalOrder.js";
 import { PayPalOrderRequest } from "../types/orders/PayPalOrderRequest.js";
 
@@ -34,6 +35,11 @@ export interface PayPalShowOrderDetailsResult
 export interface PayPalUpdateOrderResult
 {
 	emptyOrError : {} | PayPalError;
+}
+
+export interface PayPalConfirmOrderResult
+{
+	orderOrError : PayPalOrder | PayPalError;
 }
 
 export class PayPalOrdersClient
@@ -93,6 +99,25 @@ export class PayPalOrdersClient
 
 		return {
 			emptyOrError,
+		};
+	}
+
+	async confirmOrder(id : string, body : PayPalConfirmOrderRequest) : Promise<PayPalConfirmOrderResult>
+	{
+		const headers = new Headers();
+
+		headers.set("Prefer", "return=representation");
+
+		const orderOrError = await this.payPalClient.request<PayPalOrder>(
+			{
+				method: "POST",
+				path: "/v2/checkout/orders/" + id + "/confirm-payment-source",
+				headers,
+				body,
+			});
+
+		return {
+			orderOrError,
 		};
 	}
 }
