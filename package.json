@@ -1,34 +1,35 @@
 {
-  "name": "@lorenstuff/paypal-api",
-  "version": "0.2.1",
-  "description": "A library for interacting with PayPal's API.",
-  "main": "./lib/index.js",
-  "scripts": {
-    "build": "npx rimraf lib && npx tsc",
-    "prepublishOnly": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/duckdotapk/npm-paypal-api.git"
-  },
-  "keywords": [
-    "paypal",
-    "api"
-  ],
-  "author": "Loren Goodwin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/duckdotapk/npm-paypal-api/issues"
-  },
-  "homepage": "https://github.com/duckdotapk/npm-paypal-api#readme",
-  "type": "module",
-  "dependencies": {
-    "@types/luxon": "^3.4.2",
-    "luxon": "^3.2.1"
-  },
-  "devDependencies": {
-    "@types/node": "^18.11.18",
-    "rimraf": "^4.1.2",
-    "typescript": "^4.9.5"
-  }
+	"name": "@lorenstuff/paypal-api",
+	"version": "0.2.1",
+	"description": "A library for interacting with PayPal's API.",
+	"main": "./lib/index.js",
+	"scripts": {
+		"build": "npx rimraf lib && npx tsc",
+		"build:watch": "npx rimraf lib && npx tsc --watch",
+		"prepublishOnly": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/duckdotapk/npm-paypal-api.git"
+	},
+	"keywords": [
+		"paypal",
+		"api"
+	],
+	"author": "Loren Goodwin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/duckdotapk/npm-paypal-api/issues"
+	},
+	"homepage": "https://github.com/duckdotapk/npm-paypal-api#readme",
+	"type": "module",
+	"dependencies": {
+		"@types/luxon": "^3.4.2",
+		"luxon": "^3.4.4"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.10",
+		"rimraf": "^5.0.5",
+		"typescript": "^5.3.3"
+	}
 }
